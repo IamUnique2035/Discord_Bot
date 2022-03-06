@@ -123,7 +123,13 @@ async def changenick(ctx,
     joint = "% s % s % s" % (nick, nicky, nickyy)
     await member.edit(nick=joint)
     await ctx.send(f'Nickname was changed for {member.mention}')
-
+ 
+#sets a status for your bot. Just change (name=f'____') to anything you want.
+@client.event
+async def on_ready():
+    #playing,watching,streaming and listening are possible statuses
+    await client.change_presence(activity=discord.Game(name=f"Your Mum")
+                                 
 #_load (cog to be reloaded) loads cogs
 @client.command()
 async def load(ctx, extension):

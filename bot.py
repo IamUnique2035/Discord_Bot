@@ -130,13 +130,13 @@ async def on_ready():
     #playing,watching,streaming and listening are possible statuses
     await client.change_presence(activity=discord.Game(name=f"Your Mum")
                                  
-#_load (cog to be reloaded) loads cogs
+#_load (cog to be loaded) 
 @client.command()
 async def load(ctx, extension):
     client.load_extension(f'cogs.{extension}')
     await ctx.send(f'{extension}.py was loaded')
 
-#_restart (cog to be restarted)
+#_restart (cog to be reloaded)
 @client.command(aliases=['Restart'])
 async def reload(ctx, extension):
     client.unload_extension(f'cogs.{extension}')
@@ -149,9 +149,9 @@ async def unload(ctx, extension):
     client.unload_extension(f'cogs.{extension}')
     await ctx.send(f'{extension}.py was unloaded')
 
-#looks for the cog file. create a file named cogs at the same level of this file and create this file's cogs in it.
+#looks for the cog file. create a file named cogs at the same level of this file and create this programme's cogs in it.
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run('_token_here_')
+client.run('your__token_here_')

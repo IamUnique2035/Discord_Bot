@@ -45,7 +45,7 @@ async def clear(ctx, amount=10):
 async def suckdick(ctx):
     await ctx.send(f" ERROR. Can't find {ctx.author.mention}'s dick, object is missing or non-existent.")
 
-#if bot's nickname is changed to anything that includes the word porn it sets it back to original name
+#if bot's nickname is changed to anything that includes the word porn it sets it back to original name or kevin Jr(you can change this to anything you want)
 @client.event
 async def on_member_update(before, after):
     n = after.nick

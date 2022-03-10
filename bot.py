@@ -15,7 +15,7 @@ async def on_ready():
 
 #NASA API ( if you type _NASA it gives you nasa's image of the day) apply for a developer key at https://api.nasa.gov/)
 @client.command(aliases=['NASA','Nasa'])
-async def nasa(ctx):
+async def nasa(ctx, *, lmao=None):
     apodurl = 'https://api.nasa.gov/planetary/apod?'
     mykey = 'api_key=ur_API_key'
     apodurlobj = urllib.request.urlopen(apodurl + mykey)
@@ -24,7 +24,10 @@ async def nasa(ctx):
     # I wanted to display the image along with the title and an explanation. There is probably a better way to do this but it works! (lol)
     await ctx.send (f"{decodeapod['hdurl']}")
     await ctx.send(f"{decodeapod['title']}")
-    await ctx.send(f"{decodeapod['explanation']}")
+    if lmao == None:
+        await ctx.send(f'if you want more info type "_NASA info"')
+    if lmao == "info":
+        await ctx.send(f"{decodeapod['explanation']}")
     
     
 @client.command(aliases=['Help', 'HELP', 'Bot', 'BOT'])

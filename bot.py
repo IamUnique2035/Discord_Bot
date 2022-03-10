@@ -11,7 +11,20 @@ client = commands.Bot(command_prefix='_', intents=discord.Intents.all())
 async def on_ready():
     print('Bot is ready.')
 
-
+#NASA API ( if you type _NASA it gives you nasa's image of the day) apply for a developer key at https://api.nasa.gov/)
+@client.command(aliases=['NASA','Nasa'])
+async def nasa(ctx):
+    apodurl = 'https://api.nasa.gov/planetary/apod?'
+    mykey = 'api_key=ur_API_key'
+    apodurlobj = urllib.request.urlopen(apodurl + mykey)
+    apodread = apodurlobj.read()
+    decodeapod = json.loads(apodread.decode('utf-8'))
+    # I wanted to display the image along with the title and an explanation. There is probably a better way to do this but it works! (lol)
+    await ctx.send (f"{decodeapod['hdurl']}")
+    await ctx.send(f"{decodeapod['title']}")
+    await ctx.send(f"{decodeapod['explanation']}")
+    
+    
 @client.command(aliases=['Help', 'HELP', 'Bot', 'BOT'])
 async def bot(ctx):
     await ctx.send(

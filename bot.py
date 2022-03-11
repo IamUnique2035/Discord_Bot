@@ -23,7 +23,7 @@ async def nasa(ctx, *, lmao=None):
     decodeapod = json.loads(apodread.decode('utf-8'))
     # I wanted to display the image along with the title and an explanation. There is probably a better way to do this but it works! (lol)
     await ctx.send (f"{decodeapod['hdurl']}")
-    await ctx.send(f"{decodeapod['title']}")
+    await ctx.send(f"**{decodeapod['title']}**")
     if lmao == None:
         await ctx.send(f'if you want more info type "_NASA info"')
     if lmao == "info":

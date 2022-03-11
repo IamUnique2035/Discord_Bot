@@ -10,8 +10,25 @@ class API(commands.Cog):
 
     def __int__(self, client):
         self.client = client
+        
+    #NASA API ( if you type _NASA it gives you nasa's image of the day) apply for a developer key at https://api.nasa.gov/)
+    @commands.command(aliases=['NASA','Nasa'])
+    async def nasa(self, ctx, *, lmao=None):
+      apodurl = 'https://api.nasa.gov/planetary/apod?'
+      mykey = 'api_key=0yyWN7evu88eM3E8erJ2T7BZNWmFjm2Tn2tmo0HD'
+      apodurlobj = urllib.request.urlopen(apodurl + mykey)
+      apodread = apodurlobj.read()
+      decodeapod = json.loads(apodread.decode('utf-8'))
+      await ctx.send (f"{decodeapod['hdurl']}")
+      await ctx.send(f"**{decodeapod['title']}**")
+      if lmao == None:
+        await ctx.send(f'if you want more info type "_NASA info"')
+      if lmao == "info":  
+        await ctx.send(f"{decodeapod['explanation']}")
+        
 
-      
+    #bot that gives a random image a rover took along with the date and which rover took it. sometimes doesn't work since certain rovers didn't take photos on certain days.
+    #also I'm terrible at naming variables  
     @commands.command(aliases =['Rover','NASA_Rover','nasa_rover'])
     async def rover(self, ctx):
       apodurl = 'https://api.nasa.gov/mars-photos/api/v1/rovers/'
@@ -36,18 +53,8 @@ class API(commands.Cog):
       await ctx.send(f'{oofd}')
       await ctx.send(f'taken on {date} by {name} rover')
 
-      
-    @commands.command(aliases=['NASA','Nasa'])
-    async def nasa(self, ctx, *, lmao=None):
-      apodurl = 'https://api.nasa.gov/planetary/apod?'
-      mykey = 'api_key=0yyWN7evu88eM3E8erJ2T7BZNWmFjm2Tn2tmo0HD'
-      apodurlobj = urllib.request.urlopen(apodurl + mykey)
-      apodread = apodurlobj.read()
-      decodeapod = json.loads(apodread.decode('utf-8'))
-      await ctx.send (f"{decodeapod['hdurl']}")
-      await ctx.send(f"**{decodeapod['title']}**")
-      if lmao == None:
-        await ctx.send(f'if you want more info type "_NASA info"')
-      if lmao == "info":  
-        await ctx.send(f"{decodeapod['explanation']}")
+
+
+def setup(client):
+    client.add_cog(API(client))
 

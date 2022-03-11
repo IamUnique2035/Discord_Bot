@@ -29,6 +29,32 @@ async def nasa(ctx, *, lmao=None):
     if lmao == "info":
         await ctx.send(f"{decodeapod['explanation']}")
     
+#bot that gives a random image a rover took along with the date and which rover took it. sometimes doesn't work since certain rovers didn't take photos on certain days.
+#also I'm terrible at naming variables
+@client.command()
+async def rover(ctx):
+    apodurl = 'https://api.nasa.gov/mars-photos/api/v1/rovers/'
+    tros = '/photos?sol='
+    rovers = ["curiosity", "opportunity", "Spirit"]
+    lala = random.choice(rovers)
+    if lala == "Spirit":
+        sol = str(random.randrange(1, 764))
+    if lala == "opportunity":
+        sol = str(random.randrange(1, 1000))
+    if lala == "curiosity":
+        sol = str(random.randrange(99, 1000))
+    mykey = '&camera=fhaz&api_key=ur_API_key'
+    r = requests.get(apodurl + lala + tros + sol + mykey)
+    data = r.json()
+    neo = data['photos']
+    troup = neo[0]
+    rover = troup['rover']
+    name = rover['name']
+    oofd = troup['img_src']
+    date = troup['earth_date']
+    await ctx.send(f'{oofd}')
+    await ctx.send(f'taken on {date} by {name} rover')
+    
     
 @client.command(aliases=['Help', 'HELP', 'Bot', 'BOT'])
 async def bot(ctx):

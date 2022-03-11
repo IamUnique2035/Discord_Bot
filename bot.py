@@ -5,6 +5,7 @@ import json
 import urllib.request
 import random
 import os
+import requests
 
 client = commands.Bot(command_prefix='_', intents=discord.Intents.all())
 

@@ -19,6 +19,7 @@ class API(commands.Cog):
       apodurlobj = urllib.request.urlopen(apodurl + mykey)
       apodread = apodurlobj.read()
       decodeapod = json.loads(apodread.decode('utf-8'))
+      # I wanted to display the image along with the title and an explanation. There is probably a better way to do this but it works! (lol)
       await ctx.send (f"{decodeapod['hdurl']}")
       await ctx.send(f"**{decodeapod['title']}**")
       if lmao == None:

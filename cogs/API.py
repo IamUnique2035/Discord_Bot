@@ -48,11 +48,8 @@ class API(commands.Cog):
       neo = data['photos']
       troup = neo[0]
       rover = troup['rover']
-      name = rover['name']
-      oofd = troup['img_src']
-      date = troup['earth_date']
-      await ctx.send(f'{oofd}')
-      await ctx.send(f'taken on {date} by {name} rover')
+        await ctx.send(f"{troup['img_src']}")
+        await ctx.send(f"taken on {troup['earth_date']} by {rover['name']} rover")
 
 
 

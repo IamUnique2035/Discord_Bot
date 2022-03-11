@@ -40,3 +40,4 @@ class math(commands.Cog):
 
 
 def setup(client):
+    client.add_cog(math(client))

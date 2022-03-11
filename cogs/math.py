@@ -10,13 +10,13 @@ class math(commands.Cog):
     @commands.command(aliases=['Square'])
     async def square(self, ctx, *, number_to_be_squared):
       x = int(number_to_be_squared)
-      answer = (x * x)
+      answer = (x ** 2)
       await ctx.send(f'square= {answer}')
 
     @commands.command(aliases=['Cube'])
     async def cube(self, ctx, *, number_to_be_cubed):
      w = int(number_to_be_cubed)
-     answer = (w * w * w)
+     answer = (w ** 3)
      await ctx.send(f'Cube = {answer}')
 
     @commands.command(aliases=['Sum', 'add', 'Add', 'addition', 'Addition'])

@@ -15,7 +15,7 @@ class API(commands.Cog):
     @commands.command(aliases=['NASA','Nasa'])
     async def nasa(self, ctx, *, lmao=None):
       apodurl = 'https://api.nasa.gov/planetary/apod?'
-      mykey = 'api_key=0yyWN7evu88eM3E8erJ2T7BZNWmFjm2Tn2tmo0HD'
+      mykey = 'api_key=ur_key'
       apodurlobj = urllib.request.urlopen(apodurl + mykey)
       apodread = apodurlobj.read()
       decodeapod = json.loads(apodread.decode('utf-8'))
@@ -41,7 +41,7 @@ class API(commands.Cog):
         sol = str(random.randrange(1, 1000))
       if lala == "curiosity":
         sol = str(random.randrange(99, 1000))
-      mykey = '&camera=fhaz&api_key=0yyWN7evu88eM3E8erJ2T7BZNWmFjm2Tn2tmo0HD'
+      mykey = '&camera=fhaz&api_key=ur_key'
       r = requests.get(apodurl + lala + tros + sol + mykey)
       data = r.json()
       neo = data['photos']

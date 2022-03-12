@@ -56,7 +56,7 @@ class API(commands.Cog):
     @commands.command(aliases=['Weather','Time','time','temperature','Temperature','temp','Temp'])
     async def weather(self, ctx, *, place):
      apodurl = 'http://api.weatherapi.com/v1/current.json?key='
-     key = '33720ab7f35b4240b7a133819221203'
+     key = 'ur_key'
      end = '&q='
      r = requests.get(apodurl + key + end + place)
      data = r.json()

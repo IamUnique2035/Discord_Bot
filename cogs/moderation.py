@@ -6,12 +6,14 @@ class moderation(commands.Cog):
 
     def __int__(self, client):
         self.client = client
-
+        
+    # _clear (number of messages,if left blank amount =10)
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=10):
      await ctx.channel.purge(limit=amount)
 
+    #_nickname (@user1) (new nickname)
     @commands.command(pass_content=True,
                 aliases=['Nickname', 'nickname', 'Changenick'])
     @commands.has_permissions(manage_nicknames=True)

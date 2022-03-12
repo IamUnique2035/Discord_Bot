@@ -36,11 +36,6 @@ async def EasterEgg(lol):
 async def ping(ctx):
     await ctx.send(f'pong {round(client.latency * 1000)}ms')
 
-#_clear (number of messages,if left blank amount =10)
-@client.command()
-@commands.has_permissions(manage_messages=True)
-async def clear(ctx, amount=10):
-    await ctx.channel.purge(limit=amount)
 
 #dumb command lol
 @client.command(aliases=[
@@ -113,19 +108,6 @@ async def Fight(ctx, user1, *, user2):
                 f'If I wanted to see two monkeys fighting each other I would have gone to the zoo, {name1.mention} & {name2.mention}')
     await ctx.send(f'{random.choice(response)}')
 
-#_nickname (@user1) (new nickname)
-@client.command(pass_content=True,
-                aliases=['Nickname', 'nickname', 'Changenick'])
-@commands.has_permissions(manage_nicknames=True)
-async def changenick(ctx,
-                     member: discord.Member,
-                     nick,
-                     *,
-                     nicky='',
-                     nickyy=''):
-    joint = "% s % s % s" % (nick, nicky, nickyy)
-    await member.edit(nick=joint)
-    await ctx.send(f'Nickname was changed for {member.mention}')
  
 #sets a status for your bot. Just change (name=f'____') to anything you want.
 @client.event

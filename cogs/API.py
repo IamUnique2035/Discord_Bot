@@ -53,18 +53,18 @@ class API(commands.Cog):
     
     #_weather (place)
     #get API key from https://www.weatherbit.io/
-    @commands.command()
+    @commands.command(aliases=['Weather','Time','time','temperature','Temperature','temp','Temp'])
     async def weather(self, ctx, *, place):
      apodurl = 'http://api.weatherapi.com/v1/current.json?key='
-     key = 'ur_key'
+     key = '33720ab7f35b4240b7a133819221203'
      end = '&q='
      r = requests.get(apodurl + key + end + place)
      data = r.json()
      location = data['location']
      current = data['current']
      condition = current['condition']
-     await ctx.send(f"Location: **{location['name']}** \n Region: **{location['region']}**"
-                   f" \n Country: **{location['country']}** \nTime and Date: **{location['localtime']}**"
+     await ctx.send(f" \nLocation: **{location['name']}** \nRegion: **{location['region']}**"
+                   f" \nCountry: **{location['country']}** \nLatitudes: **{location['lat']}** \nLongitude: **{location['lon']}** \nTime and Date: **{location['localtime']}**"
                    f" \nWeather: **{condition['text']}** \nHumidity: **{current['humidity']}%**"
                    f" \nTemperature: **{current['feelslike_c']}°C** \nWind Speed: **{current['wind_kph']}KPH**")
 

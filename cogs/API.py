@@ -50,6 +50,23 @@ class API(commands.Cog):
       rover = troup['rover']
         await ctx.send(f"{troup['img_src']}")
         await ctx.send(f"taken on {troup['earth_date']} by {rover['name']} rover")
+    
+    #_weather (place)
+    #get API key from https://www.weatherbit.io/
+    @commands.command()
+    async def weather(self, ctx, *, place):
+     apodurl = 'http://api.weatherapi.com/v1/current.json?key='
+     key = 'ur_key'
+     end = '&q='
+     r = requests.get(apodurl + key + end + place)
+     data = r.json()
+     location = data['location']
+     current = data['current']
+     condition = current['condition']
+     await ctx.send(f"Location: **{location['name']}** \n Region: **{location['region']}**"
+                   f" \n Country: **{location['country']}** \nTime and Date: **{location['localtime']}**"
+                   f" \nWeather: **{condition['text']}** \nHumidity: **{current['humidity']}%**"
+                   f" \nTemperature: **{current['feelslike_c']}°C** \nWind Speed: **{current['wind_kph']}KPH**")
 
 
 

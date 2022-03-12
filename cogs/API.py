@@ -67,6 +67,17 @@ class API(commands.Cog):
                    f" \nCountry: **{location['country']}** \nLatitudes: **{location['lat']}** \nLongitude: **{location['lon']}** \nTime and Date: **{location['localtime']}**"
                    f" \nWeather: **{condition['text']}** \nHumidity: **{current['humidity']}%**"
                    f" \nTemperature: **{current['feelslike_c']}°C** \nWind Speed: **{current['wind_kph']}KPH**")
+    
+    #a simple API that gives out a joke. Warning some of the jokes can be a bit Extreme.
+    @commands.command()
+    async def joke(self, ctx):
+    apodurl = 'https://v2.jokeapi.dev/joke/Any?blacklistFlags=political,racist'
+    r = requests.get(apodurl)
+    data = r.json()
+    if data['type'] == 'twopart':
+        await ctx.send(f"{data['setup']} \n{data['delivery']}")
+    if data['type'] == 'single':
+        await ctx.send(f"{data['joke']}")
 
 
 

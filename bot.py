@@ -98,14 +98,12 @@ async def created(ctx):
 async def horny(ctx):
     await ctx.send(f'https://tenor.com/view/horny-jail-bonk-dog-hit-head-stop-being-horny-gif-17298755')
 
-#_fight (user1) (user2)
+#_fight (@user1) (@user2)
 @client.command(aliases=['fight'])
-async def Fight(ctx, user1, *, user2):
-    name1 = get(ctx.guild.members, name=user1)
-    name2 = get(ctx.guild.members, name=user2)
-    response = (f'{name1.mention} & {name2.mention}, Stop fighting mommy and daddy.',
-                f'Go get a room {name1.mention} & {name2.mention}.',
-                f'If I wanted to see two monkeys fighting each other I would have gone to the zoo, {name1.mention} & {name2.mention}')
+async def Fight(ctx, user1: discord.Member, user2: discord.Member):
+    response = (f'{user1.mention} & {user2.mention}, Stop fighting mommy and daddy.',
+        f'Go get a room {user1.mention} & {user2.mention}.',
+        f'If I wanted to see two monkeys fighting each other I would have gone to the zoo, {user1.mention} & {user2.mention}')
     await ctx.send(f'{random.choice(response)}')
 
  

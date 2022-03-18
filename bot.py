@@ -7,6 +7,7 @@ import random
 import os
 import requests
 
+
 client = commands.Bot(command_prefix='_', intents=discord.Intents.all())
 
 
@@ -15,22 +16,18 @@ async def on_ready():
     print('Bot is ready.')
     
     
-@client.command(aliases=['Help', 'HELP', 'Bot', 'BOT'])
-async def bot(ctx):
-    await ctx.send(
-        f'Hi ,I can do the following: \n convert fahrenheit to celcius by using  _F (value) and celcius to fahrenheit using  _C (value) \n clear messages in bulk(mod only command) using  _clear (value) the standard value is 10 messages \n convert the following currencies:usd,eur and inr to convert use _(currency you would like to convert from)_(currency you would like to convert to) (value)'
-        f' ')
-
 #dumb easter egg command lol
 @client.command(aliases=['easteregg', 'Easteregg'])
 async def easter_egg(ctx):
     await ctx.send(f'Did you think it would be this easy ?')
 
+    
 #part 2 of dumb easter egg command
 @client.command()
 async def EasterEgg(lol):
     await lol.send(f'Oh, I guess it was that easy.(easter egg 1/1 found)')
 
+    
 # _ping tester
 @client.command(aliases=['test', 'Test'])
 async def ping(ctx):
@@ -43,6 +40,7 @@ async def ping(ctx):
 async def suckdick(ctx):
     await ctx.send(f" ERROR. Can't find {ctx.author.mention}'s dick, object is missing or non-existent.")
 
+    
 #if bot's nickname is changed to anything that includes the word porn it sets it back to original name or kevin Jr(you can change this to anything you want)
 @client.event
 async def on_member_update(before, after):
@@ -55,8 +53,7 @@ async def on_member_update(before, after):
             else:
                 await after.edit(nick="Kevin Jr")
 
-
-                
+      
 @client.command(aliases=['mad', 'Mad', 'Angry', 'Angy', 'angy'])
 async def angry(ctx):
     await ctx.send(f'https://tenor.com/view/angry-cat-instant-gif-24474761')
@@ -74,6 +71,7 @@ async def mood(ctx):
     ]
     await ctx.send(f'{random.choice(feels)}')
 
+    
 #_8ball (question you would like to ask it)
 @client.command(aliases=['8ball', '8Ball'])
 async def _8ball(ctx, *, question):
@@ -98,6 +96,7 @@ async def created(ctx):
 async def horny(ctx):
     await ctx.send(f'https://tenor.com/view/horny-jail-bonk-dog-hit-head-stop-being-horny-gif-17298755')
 
+    
 #_fight (@user1) (@user2)
 @client.command(aliases=['fight'])
 async def Fight(ctx, user1: discord.Member, user2: discord.Member):
@@ -112,6 +111,7 @@ async def Fight(ctx, user1: discord.Member, user2: discord.Member):
 async def on_ready():
     #playing,watching,streaming and listening are possible statuses
     await client.change_presence(activity=discord.Game(name=f"Your Mum")
+
                                  
 #_load (cog to be loaded) 
 @client.command()
@@ -119,6 +119,7 @@ async def load(ctx, extension):
     client.load_extension(f'cogs.{extension}')
     await ctx.send(f'{extension}.py was loaded')
 
+                                 
 #_restart (cog to be reloaded)
 @client.command(aliases=['Restart'])
 async def reload(ctx, extension):
@@ -126,15 +127,18 @@ async def reload(ctx, extension):
     client.load_extension(f'cogs.{extension}')
     await ctx.send(f'{extension}.py was reloaded')
 
+                                 
 #unload (cog to be unloaded)
 @client.command()
 async def unload(ctx, extension):
     client.unload_extension(f'cogs.{extension}')
     await ctx.send(f'{extension}.py was unloaded')
 
+                                 
 #looks for the cog file. create a file named cogs at the same level of this file and create this programme's cogs in it.
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
+                                 
 client.run('your__token_here_')

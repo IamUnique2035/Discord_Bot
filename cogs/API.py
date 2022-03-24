@@ -78,8 +78,19 @@ class API(commands.Cog):
         await ctx.send(f"{data['setup']} \n{data['delivery']}")
     if data['type'] == 'single':
         await ctx.send(f"{data['joke']}")
-
-
+        
+    #an command that selects a random GIF for a given "feeling". Get a key from here https://tenor.com/gifapi 
+    @commands.command(aliases=['Tenor', 'GIF', 'gif', 'Gif'])
+    async def tenor(self, ctx, *, feeling):
+    url = 'https://g.tenor.com/v1/search?q='
+    limit = '&limit=50'
+    key = 'your_key_here'
+    full_url = requests.get(url + feeling + key + limit)
+    data = full_url.json()
+    results = data['results']
+    number = results[random.randrange(1, 50)]
+    await ctx.send(f"{number['media'][0]['gif']['url']}")
+     
 
 def setup(client):
     client.add_cog(API(client))

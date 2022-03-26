@@ -30,44 +30,41 @@ class API(commands.Cog):
 
     #bot that gives a random image a rover took along with the date and which rover took it. sometimes doesn't work since certain rovers didn't take photos on certain days.
     #also I'm terrible at naming variables  
-    @commands.command(aliases =['Rover','NASA_Rover','nasa_rover'])
+    @commands.command(aliases =['Rover', 'NASA_Rover', 'nasa_rover'])
     async def rover(self, ctx):
-      apodurl = 'https://api.nasa.gov/mars-photos/api/v1/rovers/'
-      tros = '/photos?sol='
-      rovers = ["curiosity", "opportunity", "Spirit"]
-      lala = random.choice(rovers)
-      if lala == "Spirit":
-        sol = str(random.randrange(1, 764))
-      if lala == "opportunity":
-        sol = str(random.randrange(1, 1000))
-      if lala == "curiosity":
-        sol = str(random.randrange(99, 1000))
-      mykey = '&camera=fhaz&api_key=ur_key'
-      r = requests.get(apodurl + lala + tros + sol + mykey)
-      data = r.json()
-      neo = data['photos']
-      troup = neo[0]
-      rover = troup['rover']
-        await ctx.send(f"{troup['img_src']}")
-        await ctx.send(f"taken on {troup['earth_date']} by {rover['name']} rover")
+     url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/'
+     tros = '/photos?sol='
+     rovers = ["curiosity", "opportunity", "Spirit"]
+     lala = random.choice(rovers)
+     if lala == "Spirit":
+         sol = str(random.randrange(1, 764))
+     if lala == "opportunity":
+         sol = str(random.randrange(1, 1000))
+     if lala == "curiosity":
+         sol = str(random.randrange(99, 1000))
+     my_secret = '&camera=fhaz&api_key=0yyWN7evu88eM3E8erJ2T7BZNWmFjm2Tn2tmo0HD'
+     r = requests.get(url + lala + tros + sol + my_secret)
+     data = r.json()
+     await ctx.send(f"{data['photos'][0]['img_src']}")
+     await ctx.send(f"taken on {data['photos'][0]['earth_date']} by {data['photos'][0]['rover']['name']} rover")
+    
     
     #_weather (place)
     #get API key from https://www.weatherbit.io/
-    @commands.command(aliases=['Weather','Time','time','temperature','Temperature','temp','Temp'])
+    @commands.command(aliases=['Weather', 'Time', 'time', 'temperature', 'Temperature', 'temp', 'Temp'])
     async def weather(self, ctx, *, place):
      apodurl = 'http://api.weatherapi.com/v1/current.json?key='
-     key = 'ur_key'
+     my_secret = os.environ['WEATHER_API']
      end = '&q='
-     r = requests.get(apodurl + key + end + place)
+     r = requests.get(apodurl + my_secret + end + place)
      data = r.json()
-     location = data['location']
-     current = data['current']
-     condition = current['condition']
-     await ctx.send(f" \nLocation: **{location['name']}** \nRegion: **{location['region']}**"
-                   f" \nCountry: **{location['country']}** \nLatitudes: **{location['lat']}** \nLongitude: **{location['lon']}** \nTime and Date: **{location['localtime']}**"
-                   f" \nWeather: **{condition['text']}** \nHumidity: **{current['humidity']}%**"
-                   f" \nTemperature: **{current['feelslike_c']}°C** \nWind Speed: **{current['wind_kph']}KPH**")
-    
+     await ctx.send(f"\nLocation: **{data['location']['name']}**\nRegion: **{data['location']['region']}**"
+                   f"\nCountry: **{data['location']['country']}**\nLatitudes: **{data['location']['lat']}** "
+                   f"\nLongitude: **{data['location']['lon']}**\nDate & Time: **{data['location']['localtime']}**"
+                   f"\nWeather: **{data['current']['condition']['text']}**\nHumidity: **{data['current']['humidity']}%**"
+                   f"\nTemperature: **{data['current']['feelslike_c']}°C**\nWind Speed: **{data['current']['wind_kph']}KPH**")
+        
+        
     #a simple API that gives out a joke. Warning some of the jokes can be a bit Extreme.
     @commands.command()
     async def joke(self, ctx):
@@ -90,6 +87,26 @@ class API(commands.Cog):
     results = data['results']
     number = results[random.randrange(1, 50)]
     await ctx.send(f"{number['media'][0]['gif']['url']}")
+    
+    
+    #_search (topic)
+    #search nasa's Image library for the topic and chooses a random image along with the title and description.
+    @commands.command(aliases=['search', 'Search', 'NASA_Search'])
+    async def nasa_search(self, ctx, *, search):
+     url = 'https://images-api.nasa.gov/search?q='
+     media_type = '&media_type=image'
+     r = requests.get(url + search + media_type)
+     data = r.json()
+     x = random.randrange(0, 100)
+     detes = requests.get(data['collection']['items'][x]['href'])
+     doots = data['collection']['items'][x]['data'][0]
+     true_data = detes.json()
+     if true_data[0].endswith('.tif'):
+         await ctx.send(true_data[1])
+     else:
+         await ctx.send(true_data[0])
+     await ctx.send(f"**{doots['title']}** taken on **{doots['date_created']}**\n{doots['description']}")
+     
      
 
 def setup(client):

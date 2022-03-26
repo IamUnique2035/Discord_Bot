@@ -42,7 +42,7 @@ class API(commands.Cog):
          sol = str(random.randrange(1, 1000))
      if lala == "curiosity":
          sol = str(random.randrange(99, 1000))
-     my_secret = '&camera=fhaz&api_key=0yyWN7evu88eM3E8erJ2T7BZNWmFjm2Tn2tmo0HD'
+     my_secret = '&camera=fhaz&api_key=ur_key'
      r = requests.get(url + lala + tros + sol + my_secret)
      data = r.json()
      await ctx.send(f"{data['photos'][0]['img_src']}")
@@ -54,7 +54,7 @@ class API(commands.Cog):
     @commands.command(aliases=['Weather', 'Time', 'time', 'temperature', 'Temperature', 'temp', 'Temp'])
     async def weather(self, ctx, *, place):
      apodurl = 'http://api.weatherapi.com/v1/current.json?key='
-     my_secret = os.environ['WEATHER_API']
+     my_secret = ur_key
      end = '&q='
      r = requests.get(apodurl + my_secret + end + place)
      data = r.json()

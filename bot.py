@@ -58,7 +58,8 @@ async def on_member_update(before, after):
 async def angry(ctx):
     await ctx.send(f'https://tenor.com/view/angry-cat-instant-gif-24474761')
 
-
+    
+#displays a random GIF when _mood is typed.
 @client.command(aliases=['Mood', 'feeling', 'Feeling'])
 async def mood(ctx):
     feels = [
@@ -67,7 +68,9 @@ async def mood(ctx):
         'https://tenor.com/view/dog-puppy-dog-eyes-pout-sad-cute-animals-gif-11172970',
         'https://tenor.com/view/horny-jail-bonk-dog-hit-head-stop-being-horny-gif-17298755',
         'https://tenor.com/view/cat-bed-laying-lazy-dzekas-gif-20013760',
-        'https://tenor.com/view/lazy-cat-funny-fat-animals-gif-20933835'
+        'https://tenor.com/view/lazy-cat-funny-fat-animals-gif-20933835'  ,
+        'https://tenor.com/view/sad-cat-sunakook-tired-exhausted-gif-24687868',
+        'https://tenor.com/view/dog-dogs-doggy-angry-thinking-gif-18088194'
     ]
     await ctx.send(f'{random.choice(feels)}')
 
